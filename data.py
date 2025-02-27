@@ -1,5 +1,32 @@
-class Data:
-    REGISTRATION_NAME = "blablabla"
-    REGISTRATION_PASSWORD = "123456789"
+class MainPageAnswers:
+    main_page_answer_0 = "Сутки — 400 рублей. Оплата курьеру — наличными или картой."
+    main_page_answer_1 = "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим."
+    main_page_answer_2 = "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30."
+    main_page_answer_3 = "Только начиная с завтрашнего дня. Но скоро станем расторопнее."
+    main_page_answer_4 = "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010."
+    main_page_answer_5 = "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится."
+    main_page_answer_6 = "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои."
+    main_page_answer_7 = "Да, обязательно. Всем самокатов! И Москве, и Московской области."
 
-    REGISTRATION_WRONG_PASSWORD = "1"
+class TestData:
+    NAME_1 = "Лариса"
+    LAST_NAME_1 = "Гузеева"
+    ADDRESS_1 = "Москва"
+    PHONE_1 = "89009999999"
+    DATE_1 = "13.03.2025"
+    COMMENT_1 = "Срочно!"
+    NAME_2 = "Кендал"
+    LAST_NAME_2 = "Дженнер"
+    ADDRESS_2 = "Лобня"
+    PHONE_2 = "89001111111"
+    DATE_2 = "20.03.2025"
+    COMMENT_2 = "Можете не торопиться"
+    # DZEN_LOGO = "Дзен"
+    # DZEN_URL_REDIRECT = "https://dzen.ru/?yredirect=true"
+    # BASE_URL = "https://qa-scooter.praktikum-services.ru/"
+    # ORDER_URL = "https://qa-scooter.praktikum-services.ru/order"
+
+# class Urls:
+#     DZEN_URL_REDIRECT = "https://dzen.ru/?yredirect=true"
+#     BASE_URL = "https://qa-scooter.praktikum-services.ru/"
+#     ORDER_URL = "https://qa-scooter.praktikum-services.ru/order"
