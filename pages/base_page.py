@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from locators.main_page_locators import MainPageLocators
 
 
+
 class BasePage:
 
 
