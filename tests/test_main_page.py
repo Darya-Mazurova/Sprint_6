@@ -1,14 +1,10 @@
 import allure
 import pytest
 from pages.main_page import MainPage
-from Locators.main_page_locators import MainPageLocators
+from locators.main_page_locators import MainPageLocators
 from data import MainPageAnswers
 
 class TestMainPageQuestions:
-    @allure.feature("Main Page")
-    @allure.story("Questions")
-    @allure.title("Test question {q_num}")
-    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize(
         "q_num, expected_result",
         [
@@ -20,8 +16,7 @@ class TestMainPageQuestions:
             (5, MainPageAnswers.main_page_answer_5),
             (6, MainPageAnswers.main_page_answer_6),
             (7, MainPageAnswers.main_page_answer_7),
-        ]
-    )
+        ])
     def test_questions(self, driver, q_num, expected_result):
         main_page = MainPage(driver)
         with allure.step(f"Clicking on question {q_num}"):
