@@ -13,14 +13,14 @@ class BasePage:
         self.driver: WebDriver= driver
 
     @allur.step("Открыть страницу")
-    def open(self):
-        self.driver.get(self.PAGE_URL) # Открыть страницу
+    def open(self,url):
+        self.driver.get(url) # Открыть страницу
 
     def find_element_with_wait(self, locator):
         return WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(locator)) # найти элемент
 
     def click_on_element(self, locator):
-        element = self.find_element_with_wait(locator)
+        element = self.find_element_with_wait(*locator)
         try:
             element.click()
         except ElementClickInterceptedException:

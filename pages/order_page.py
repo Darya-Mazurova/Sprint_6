@@ -1,17 +1,23 @@
 import allure
-from locators.order_page_locators import OrderPageLocators
+from Locators.order_page_locators import OrderPageLocators
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
-from locators.main_page_locators import MainPageLocators
-from locators.headers_locators import HeadersLocators
+from Locators.main_page_locators import MainPageLocators
+from Locators.headers_locators import HeadersLocators
 from pages.base_page import BasePage
-from data import TestData, Urls
+from data import TestData
+from urls import Urls
 
 class OrderPage(BasePage):
-    def open_page(self, url):
-        self.driver.get(self.PAGE_URL)
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.locators = OrderPageLocators()
+
+
+    def open_page(self):
+        self.get(Urls.PAGE_URL)
 
     @allure.step("Нажать кнопку Заказать в хэдере страницы" )
     def click_order_button_headers(self):
@@ -22,6 +28,28 @@ class OrderPage(BasePage):
     def click_order_button_bottom(self):
         order_button_bottom = self.driver.find_element(*MainPageLocators.BUTTON_ORDER_DOWN)
         order_button_bottom.click()
+
+    def place_an_order_1(self,name,last_name,address,phone):
+        self.fill_input(self.locators.INPUT_NAME, name)
+        self.fill_input(self.locators.INPUT_LAST_NAME, last_name)
+        self.fill_input(self.locators.INPUT_ADDRESS, address)
+        self.fill_input(self.locators.INPUT_PHONE, phone)
+
+
+        self.click_on_element(self.locators.BUTTON_NEXT)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @allure.step("Ввести имя")
     def input_name(self, name):
@@ -38,24 +66,30 @@ class OrderPage(BasePage):
         address = self.driver.find_element(*OrderPageLocators.INPUT_ADDRESS)
         address.send_keys(address)
 
-    @allure.step("Выбрать станцию метро")
+    @allure.step("Выбрать станцию метро 1")
     def select_metro_station_1(self):
-        self.driver.find_element(*OrderPageLocators.SELECT_METRO).click()
-        self.driver.find_element(*OrderPageLocators.SELECT_METRO_STATION_1).click()
+        metro_station = self.driver.find_element(*OrderPageLocators.SELECT_METRO)
+        metro_station.click()
+        metro_station_1 = self.driver.find_element(*OrderPageLocators.METRO_STATION_1)
+        metro_station_1.click()
 
-    @allure.step("Выбрать станцию метро")
+    @allure.step("Выбрать станцию метро 2")
     def select_metro_station_2(self):
-        self.driver.find_element(*OrderPageLocators.SELECT_METRO).click()
-        self.driver.find_element(*OrderPageLocators.SELECT_METRO_STATION_2).click()
+        metro_station = self.driver.find_element(*OrderPageLocators.SELECT_METRO)
+        metro_station.click()
+        metro_station_1 = self.driver.find_element(*OrderPageLocators.METRO_STATION_2)
+        metro_station_1.click()
 
     @allure.step("Ввести номер телефона")
     def input_phone(self, phone):
-        phone = self.driver.find_element(*MainPageLocators.PHONE_INPUT)
+        phone = self.driver.find_element(*OrderPageLocators.INPUT_PHONE)
         phone.send_keys(phone)
 
     @allure.step("Нажать кнопку Далее")
     def click_next_button(self):
-        self.driver.find_element(*OrderPageLocators.BUTTON_NEXT).click()
+        next_button = self.driver.find_element(*OrderPageLocators.BUTTON_NEXT)
+        next_button.click()
+
 
     @allure.step("Выбрать дату")
     def input_date(self, date):
@@ -97,4 +131,26 @@ class OrderPage(BasePage):
     def is_order_confirmed (self):
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(OrderPageLocators.TEXT_ORDER_CONFIRMED))
 
+    @allure.step("Click Yandex logo")
+    def click_yandex_button(self):
+        # Сохраняем текущее окно
+        main_window_handle = self.driver.current_window_handle
+
+        yandex_logo = self.driver.find_element(*HeadersLocators.YANDEX_LOGO)
+        yandex_logo.click()
+
+        WebDriverWait(self.driver, 10).until(EC.number_of_windows_to_be(2))
+
+        for window_handle in self.driver.window_handles:
+            if window_handle != main_window_handle:
+                self.driver.switch_to.window(window_handle)
+                break
+
+        WebDriverWait(self.driver, 10).until(EC.title_contains(TestData.DZEN_LOGO))
+
+        WebDriverWait(self.driver, 10).until(EC.url_contains(TestData.DZEN_URL_REDIRECT))
+
+    @allure.step("Click Samokat logo")
+    def click_samocat_button(self):
+        self.driver.find_element(*HeadersLocators.SAMOKAT_LOGO).click()
 
