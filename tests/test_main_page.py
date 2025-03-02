@@ -1,10 +1,15 @@
 import allure
 import pytest
+
+from conftest import driver
 from pages.main_page import MainPage
 from locators.main_page_locators import MainPageLocators
 from data import MainPageAnswers
+from urls import Urls
+
 
 class TestMainPageQuestions:
+
     @pytest.mark.parametrize(
         "q_num, expected_result",
         [
@@ -19,6 +24,7 @@ class TestMainPageQuestions:
         ])
     def test_questions(self, driver, q_num, expected_result):
         main_page = MainPage(driver)
+
         with allure.step(f"Clicking on question {q_num}"):
             result = main_page.click_to_question_and_get_answer_text(MainPageLocators.QUESTION_LOCATOR, q_num)
         with allure.step(f"Verifying answer for question {q_num}"):

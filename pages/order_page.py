@@ -15,7 +15,8 @@ class OrderPage(BasePage):
         super().__init__(driver)
         self.locators = OrderPageLocators ()
 
-    def open_page(self, url):
+    def open_page(self,url):
+        self.driver.get(url)
         self.open(Urls.BASE_URL)
 
     def click_order_button_up(self):
@@ -173,5 +174,5 @@ class OrderPage(BasePage):
 
         WebDriverWait(self.driver, 10).until(EC.url_contains(Urls.DZEN_URL_REDIRECT))
 
-    # def click_samocat_button(self):
-    #     self.driver.find_element(*HeadersLocators.SAMOKAT_LOGO).click()
+    def click_samocat_button(self):
+        self.driver.find_element(*HeadersLocators.SAMOKAT_LOGO).click()

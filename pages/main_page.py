@@ -17,9 +17,6 @@ class MainPage(BasePage):
     def click_to_question_and_get_answer_text(self, locator_q, num):
         method, locator = locator_q
         locator = locator.format(num)
-
-
-
         element = self.find_element_with_wait((method, locator))
         self.scroll_into_view(element)
 

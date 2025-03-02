@@ -52,4 +52,4 @@ class BasePage:
     def scroll_into_view(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
-    # Другие общие методы
+

@@ -10,5 +10,5 @@ class Urls:
     DZEN_URL_REDIRECT = "https://dzen.ru/?yredirect=true"
 
 
-    # url главной страницы
+
 
