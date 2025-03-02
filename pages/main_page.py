@@ -5,7 +5,6 @@ from selenium.common.exceptions import ElementClickInterceptedException
 
 from urls import Urls
 
-
 class MainPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)

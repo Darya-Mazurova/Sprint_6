@@ -13,21 +13,16 @@ class TestData:
     LAST_NAME = "Гузеева"
     ADDRESS = "Москва"
     PHONE = "89999999999"
-    DATE = "13.03.2025"
+    DATE = "12.03.2025"
     COMMENT = "Срочно!!!"
-    NAME_1 = "Иван"
-    LAST_NAME_1 = "Иванов"
-    ADDRESS_1 = "Мытищи"
-    PHONE_1 = "89991001010"
-    DATE_1 = "15.03.2024"
-    COMMENT_1 = "После завтра"
+    NAME_1 = "Тилль"
+    LAST_NAME_1 = "Линдеманн"
+    ADDRESS_1 = "Лобня"
+    PHONE_1 = "89991111111"
+    DATE_1 = "19.04.2025"
+    COMMENT_1 = "Можешь не торопиться"
     DZEN_LOGO = "Дзен"
 
-class Urls:
 
-    PAGE_URL = "https://qa-scooter.praktikum-services.ru/"
-    DZEN_URL_REDIRECT = "https://dzen.ru/?yredirect=true"
-    BASE_URL = "https://qa-scooter.praktikum-services.ru/"
-    ORDER_URL = "https://qa-scooter.praktikum-services.ru/order"
-    DZEN_URL_REDIRECT = "https://dzen.ru/?yredirect=true"
+
 

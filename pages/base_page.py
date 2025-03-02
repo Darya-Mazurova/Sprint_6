@@ -1,3 +1,4 @@
+import allure
 from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -10,6 +11,7 @@ class BasePage:
         self.first_time = True
         self.accept_cookies_if_first_time()
 
+    @allure.step('Открываем браузер')
     def open(self,url):
         self.driver.get(url)
 
@@ -24,8 +26,6 @@ class BasePage:
     def fill_input(self, locator, text):
         self.driver.find_element(*locator).send_keys(text)
 
-
-
     def accept_cookies_if_first_time(self):
         if self.first_time:
 
@@ -38,8 +38,6 @@ class BasePage:
 
     def find_element_with_wait(self, locator):
         return WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(locator))
-
-
 
     def get_text_from_element(self, locator):
         element = self.find_element_with_wait(locator)

@@ -5,8 +5,6 @@ from conftest import driver
 from pages.main_page import MainPage
 from locators.main_page_locators import MainPageLocators
 from data import MainPageAnswers
-from urls import Urls
-
 
 class TestMainPageQuestions:
 
