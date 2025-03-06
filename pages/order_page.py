@@ -1,4 +1,6 @@
 import allure
+
+from locators.main_page_locators import MainPageLocators
 from locators.order_page_locators import OrderPageLocators
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -13,14 +15,17 @@ class OrderPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.locators = OrderPageLocators ()
-    @allure.step('Открываем странцу Яндекс Самокат')
-    def open_page(self,url):
-        self.driver.get(url)
-        self.open(Urls.BASE_URL)
 
     @allure.step('Нажимаем кнопку Заказать в хэдере страницы')
-    def click_order_button_up(self):
-        self.driver.find_element(*HeadersLocators.BUTTON_ORDER_UP).click()
+    def click_order_button_is_header(self):
+        self.click_on_element(HeadersLocators.BUTTON_ORDER_UP)
+
+    @allure.step('Нажимаем кнопку Заказать в хэдере страницы')
+    def click_order_button_down(self):
+        self.click_order_button_down(MainPageLocators.BUTTON_ORDER_DOWN_MIDDLE)
+
+
+
 
     @allure.step('Заполняем поля формы Для кого самокат')
     def fill_order_one_1 (self, name, last_name, address, phon):
@@ -31,15 +36,15 @@ class OrderPage(BasePage):
 
     @allure.step('Выбираем станцию метро Бульвар Рокоссовского')
     def select_metro_station_1(self):
-        self.driver.find_element(*OrderPageLocators.SELECT_METRO).click()
-        self.driver.find_element(*OrderPageLocators.SELECT_METRO_STATION_1).click()
+        self.find_element(*OrderPageLocators.SELECT_METRO).click()
+        self.find_element(*OrderPageLocators.SELECT_METRO_STATION_1).click()
 
         self.click_on_element(self.locators.BUTTON_NEXT)
 
     @allure.step('Выбираем станцию метро Черкизовская')
     def select_metro_station_2(self):
-        self.driver.find_element(*OrderPageLocators.SELECT_METRO).click()
-        self.driver.find_element(*OrderPageLocators.SELECT_METRO_STATION_2).click()
+        self.find_element(*OrderPageLocators.SELECT_METRO).click()
+        self.find_element(*OrderPageLocators.SELECT_METRO_STATION_2).click()
 
         self.click_on_element(self.locators.BUTTON_NEXT)
 
@@ -79,6 +84,7 @@ class OrderPage(BasePage):
     def click_yes_button(self):
         self.driver.find_element(*OrderPageLocators.BUTTON_YES).click()
 
+    @allure.step('Ждем текст "Заказ оформлен"')
     def is_order_confirmed(self):
       WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(OrderPageLocators.TEXT_ORDER_CONFIRMED))
 
@@ -88,17 +94,24 @@ class OrderPage(BasePage):
         yandex_logo = self.driver.find_element(*HeadersLocators.YANDEX_LOGO)
         yandex_logo.click()
 
-        WebDriverWait(self.driver, 10).until(EC.number_of_windows_to_be(2))
+        WebDriverWait(self.driver, 5).until(EC.number_of_windows_to_be(2))
 
         for window_handle in self.driver.window_handles:
             if window_handle != main_window_handle:
                 self.driver.switch_to.window(window_handle)
                 break
 
-        WebDriverWait(self.driver, 10).until(EC.title_contains(TestData.DZEN_LOGO))
+        WebDriverWait(self.driver, 5).until(EC.title_contains(TestData.DZEN_LOGO))
 
-        WebDriverWait(self.driver, 10).until(EC.url_contains(Urls.DZEN_URL_REDIRECT))
+        WebDriverWait(self.driver, 5).until(EC.url_contains(Urls.DZEN_URL_REDIRECT))
 
     @allure.step('Нажимаем на логотип "Самокат"')
     def click_samocat_button(self):
-        self.driver.find_element(*HeadersLocators.SAMOKAT_LOGO).click()
+        self.find_element(*HeadersLocators.SAMOKAT_LOGO).click()
+
+    @allure.step('Проверка появления окна создания заказа с кнопкой "Посмотреть статус"')
+    def check_if_success_window_visible(self):
+        self.find_element_with_wait(OrderPageLocators.STATUS_BUTTON)
+        actual_text = self.get_text_from_element (OrderPageLocators.STATUS_BUTTON)
+        assert actual_text == TestData.TEXT_STATUS_BUTTON
+

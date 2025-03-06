@@ -22,6 +22,9 @@ class TestData:
     DATE_1 = "19.04.2025"
     COMMENT_1 = "Можешь не торопиться"
     DZEN_LOGO = "Дзен"
+    TEXT_STATUS_BUTTON = "Посмотреть статус"
+    URL_DZEN = "https://dzen.ru/"
+
 
 
 

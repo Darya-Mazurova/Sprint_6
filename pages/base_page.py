@@ -3,6 +3,8 @@ from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+
 from locators.main_page_locators import MainPageLocators
 
 class BasePage:
@@ -11,7 +13,7 @@ class BasePage:
         self.first_time = True
         self.accept_cookies_if_first_time()
 
-    @allure.step('Открываем браузер')
+    @allure.step('Открываем сайт')
     def open(self,url):
         self.driver.get(url)
 
@@ -22,6 +24,17 @@ class BasePage:
         except ElementClickInterceptedException:
             self.scroll_into_view(element)
             element.click()
+
+    def find_element(self, locator):
+        self.driver.find_element(locator).click()
+
+    def click_order_button(self,locator):
+        self.driver.find_element(locator).click()
+
+    def click_order_button_down(self, locator):
+        element = self.find_element_with_wait(*locator)
+        self.scroll_into_view(element)
+        element.click()
 
     def fill_input(self, locator, text):
         self.driver.find_element(*locator).send_keys(text)
@@ -37,17 +50,20 @@ class BasePage:
             self.first_time = False
 
     def find_element_with_wait(self, locator):
-        return WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(locator))
+        return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))
 
     def get_text_from_element(self, locator):
-        element = self.find_element_with_wait(locator)
-        return element.text
+        element_text = self.find_element_with_wait(locator).text
+        return element_text
 
-    def set_text_to_element(self, locator, text):
+    def set_text_to_element(self, locator,text):
         element = self.find_element_with_wait(locator)
         element.send_keys(text)
 
     def scroll_into_view(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
+
+
 
 

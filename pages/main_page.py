@@ -1,3 +1,6 @@
+import allure
+
+from locators.headers_locators import HeadersLocators
 from locators.main_page_locators import MainPageLocators
 
 from pages.base_page import BasePage
@@ -10,9 +13,13 @@ class MainPage(BasePage):
         super().__init__(driver)
         self.locators = MainPageLocators()
 
+
+
+    @allure.step("Открываем страницу Яндекс.Самокат")
     def open_page(self, url):
         self.open(Urls.BASE_URL)
 
+    @allure.step("Кликаем на Вопросы о важном и получаем ответ ")
     def click_to_question_and_get_answer_text(self, locator_q, num):
         method, locator = locator_q
         locator = locator.format(num)
@@ -28,3 +35,5 @@ class MainPage(BasePage):
         answer_locator_method, answer_locator = MainPageLocators.ANSWER_LOCATOR
         answer_locator = answer_locator.format(num)
         return self.get_text_from_element((answer_locator_method, answer_locator))
+
+
