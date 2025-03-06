@@ -36,15 +36,15 @@ class OrderPage(BasePage):
 
     @allure.step('Выбираем станцию метро Бульвар Рокоссовского')
     def select_metro_station_1(self):
-        self.find_element(*OrderPageLocators.SELECT_METRO).click()
-        self.find_element(*OrderPageLocators.SELECT_METRO_STATION_1).click()
+        self.driver.find_element(*OrderPageLocators.SELECT_METRO).click()
+        self.driver.find_element(*OrderPageLocators.SELECT_METRO_STATION_1).click()
 
         self.click_on_element(self.locators.BUTTON_NEXT)
 
     @allure.step('Выбираем станцию метро Черкизовская')
     def select_metro_station_2(self):
-        self.find_element(*OrderPageLocators.SELECT_METRO).click()
-        self.find_element(*OrderPageLocators.SELECT_METRO_STATION_2).click()
+        self.driver.find_element(*OrderPageLocators.SELECT_METRO).click()
+        self.driver.find_element(*OrderPageLocators.SELECT_METRO_STATION_2).click()
 
         self.click_on_element(self.locators.BUTTON_NEXT)
 
@@ -107,7 +107,7 @@ class OrderPage(BasePage):
 
     @allure.step('Нажимаем на логотип "Самокат"')
     def click_samocat_button(self):
-        self.find_element(*HeadersLocators.SAMOKAT_LOGO).click()
+        self.driver.find_element(*HeadersLocators.SAMOKAT_LOGO).click()
 
     @allure.step('Проверка появления окна создания заказа с кнопкой "Посмотреть статус"')
     def check_if_success_window_visible(self):
